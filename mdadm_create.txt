@@ -1,1 +1,1 @@
-mdadm —detail —scan —verbose | awk ‘/ARRAY/ {print}’ >> /etc/mdadm/mdadm.conf
+mdadm --create raid1 -l 1 -n 4 /dev/nvme0n{2..5}
