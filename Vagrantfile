@@ -41,7 +41,7 @@ def create_nvme_disks(vbox, name)
   dir = "../vdisks"
   FileUtils.mkdir_p dir unless File.directory?(dir)
 
-  disks = (0..4).map { |x| ["nvmedisk#{x}", '1024'] }
+  disks = (1..6).map { |x| ["nvmedisk#{x}", '1024'] }
 
   disks.each_with_index do |(name, size), i|
     file_to_disk = "#{dir}/#{name}.vdi"
@@ -81,7 +81,7 @@ def create_disks(vbox, name, box)
   dir = "../vdisks"
   FileUtils.mkdir_p dir unless File.directory?(dir)
 
-  disks = (1..6).map { |x| ["disk#{x}", '1024'] }
+  disks = (1..8).map { |x| ["disk#{x}", '1024'] }
 
   disks.each_with_index do |(name, size), i|
     file_to_disk = "#{dir}/#{name}.vdi"
@@ -114,7 +114,9 @@ def create_disks(vbox, name, box)
 end
 
 Vagrant.configure("2") do |config|
-
+#config.proxy.http     = "http://51.68.132.226:3128"
+#config.proxy.https    = "http://51.68.132.226:3128"
+#config.proxy.no_proxy = "localhost,127.0.0.1"
 config.vm.define "server" do |server|
   #config.vm.box = 'centos/8'
   config.vm.box = 'almalinux/8'
